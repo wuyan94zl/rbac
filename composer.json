@@ -1,0 +1,24 @@
+{
+    "name": "eachdemo\/rbac",
+    "description": "Package description here.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "wuyan",
+            "email": "wuyan@nabao.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Eachdemo\\Rbac\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Eachdemo\\Rbac\\RbacServiceProvider"
+            ]
+        }
+    }
+}
