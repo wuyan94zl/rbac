@@ -61,6 +61,9 @@ class MenuController extends Controller
         if(RbacPermission::where('menu_id',$id)->first()){
             return $this->responseFailed('请先删除菜单下面的权限');
         }
+        if(RbacMenu::where('pid',$id)->first()){
+            return $this->responseFailed('请先删除下级菜单');
+        }
         RbacMenu::where('id',$id)->delete();
         return $this->responseSucceed();
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Eachdemo\Rbac\Models\RbacRole;
 use Eachdemo\Rbac\Models\RbacRoleHasMenuPermission;
+use Eachdemo\Rbac\Models\RbacAdminHasRole;
 
 use Eachdemo\Rbac\Traits\ApiResponse;
 
@@ -55,6 +56,9 @@ class RoleController extends Controller
         if(RbacRoleHasMenuPermission::where('role_id',$id)->first()){
             return $this->responseFailed('请先清空角色权限');
         }
+        if(RbacAdminHasRole::where('role_id',$id)->first()){
+            return $this->responseFailed('请先删除用户该角色');
+        }
         RbacRole::where('id',$id)->delete();
         return $this->responseSucceed();
     }
@@ -96,7 +100,7 @@ class RoleController extends Controller
      * @return [Boolean]
      */
     public function setMenuPermission($id, Request $request){
-        $data = $request->validate(['permissions'=>'required|array']);
+        $data = $request->validate(['permissions'=>'array']);
         $set_menu_permission = (new RbacRoleHasMenuPermission())->setMenuPermissionForRole($id,$data['permissions']);
         return $this->responseSucceed();
     }

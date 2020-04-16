@@ -93,11 +93,13 @@ class RbacRoleHasMenuPermission extends Model
 
     private function formatRoleMenuPermission($all_menu_permission){
     	foreach ($all_menu_permission as $k => $v) {
-    		$all_menu_permission[$k]['type'] = 'menu';
+            $all_menu_permission[$k]['type'] = 'menu';
+    		$all_menu_permission[$k]['name'] .= '（菜单）';
     		if(isset($v['permissions'])){
     			foreach ($v['permissions'] as $pk => $pv) {
     				$v['permissions'][$pk]['id'] = $pv['id']*1000000;
-    				$v['permissions'][$pk]['type'] = 'permission';
+                    $v['permissions'][$pk]['type'] = 'permission';
+    				$v['permissions'][$pk]['name'] .= '（权限）';
     			}
     			$all_menu_permission[$k]['children'] = $v['permissions'];
     			unset($all_menu_permission[$k]['permissions']);

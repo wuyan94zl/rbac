@@ -28,7 +28,7 @@ class PermissionController extends Controller
             'menu_id' => 'required|integer',
         ]);
         RbacPermission::create($data);
-        return true;
+        return $this->responseSucceed();
     }
 
     /**
@@ -68,13 +68,15 @@ class PermissionController extends Controller
         $routes = $app->routes->getRoutes();
         $actions = [];
         foreach ($routes as $k=>$value){
-            if(isset($value->getAction()['controller'])) {
-                $action = $value->getAction()['controller'];
-                if(strstr($action, '@') && !strstr($action, 'Eachdemo\Rbac'))
-                    $actions[] = $action;
+            $action = $value->getAction();
+            if(isset($action['controller']) && isset($action['middleware']) && is_array($action['middleware'])) {
+                if(in_array('eachdemo.rbac.permission', $action['middleware']) && !strstr($action['controller'], 'Eachdemo\Rbac')){
+                    $actions[$value->uri] = $action['controller'];
+                }
             }
         }
-
+        if(empty($actions))
+            return $this->responseFailed('未找到权限路由');
         $has = RbacPermission::whereIn('action',$actions)->get()->toArray();
         $has = array_column($has,null, 'action');
 
@@ -83,11 +85,11 @@ class PermissionController extends Controller
         foreach ($actions as $k => $v) {
             if(!isset($has[$v])){
                 if(empty($menu)){
-                    $menu = RbacMenu::create(['pid' => 0,'name' => '临时菜单','route' => '','display' => 0]);
+                    $menu = RbacMenu::create(['pid' => 0,'name' => '临时菜单','route' => '','sort'=>999,'display' => 0]);
                 }
                 $create[] = [
                     'menu_id'=>$menu->id,
-                    'name'=>$v,
+                    'name'=>$k,
                     'action'=>$v,
                 ];
             }

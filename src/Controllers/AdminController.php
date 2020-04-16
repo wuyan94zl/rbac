@@ -5,6 +5,7 @@ namespace Eachdemo\Rbac\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Eachdemo\Rbac\Models\RbacAdmin;
+use Eachdemo\Rbac\Models\RbacAdminHasRole;
 use Eachdemo\Rbac\Traits\ApiResponse;
 use \Tymon\JWTAuth\Facades\JWTAuth;
 use Auth;
@@ -108,6 +109,7 @@ class AdminController extends Controller
      * @return [Boolean]
      */
     public function delete($id){
+        RbacAdminHasRole::where('admin_id',$id)->delete();
         RbacAdmin::where('id',$id)->delete();
         return $this->responseSucceed();
     }

@@ -134,6 +134,7 @@ class RbacMenu extends Model
             ->join('rbac_roles','rbac_roles.id','=','rbac_role_has_menu_permissions.role_id')
             ->join('rbac_admin_has_roles','rbac_admin_has_roles.role_id','=','rbac_roles.id')
             ->where('rbac_admin_has_roles.admin_id',$admin->id)->where('rbac_role_has_menu_permissions.type',0)
+            ->where('rbac_menus.display',1)
             ->select('rbac_menus.id','rbac_menus.pid','rbac_menus.name as title','rbac_menus.icon','rbac_menus.route as index')->get()->toArray();
 
         $menu = $this->treeArray(array_column($menu,null, 'id'),'pid','subs');
