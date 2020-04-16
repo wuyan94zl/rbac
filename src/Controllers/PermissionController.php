@@ -8,7 +8,6 @@ use Eachdemo\Rbac\Models\RbacPermission;
 use Eachdemo\Rbac\Models\RbacMenu;
 use Eachdemo\Rbac\Traits\ApiResponse;
 use Illuminate\Support\Facades\Route;
-use Log;
 
 class PermissionController extends Controller
 {

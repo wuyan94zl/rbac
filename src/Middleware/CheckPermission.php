@@ -3,7 +3,6 @@ namespace Eachdemo\Rbac\Middleware;
 use Closure;
 use Auth;
 use Illuminate\Support\Facades\DB;
-use Log;
 class CheckPermission
 {
     /**
@@ -15,7 +14,6 @@ class CheckPermission
     public function handle($request, Closure $next)
     {
         $admin = Auth::user();
-        Log::info($admin);
         if($admin->id === 1) return $next($request);
         
         $route = $request->route()->getAction();
