@@ -79,7 +79,7 @@ class RbacRoleHasMenuPermission extends Model
     	rep:
     	$pid = [];
     	foreach ($roles as $k => $v) {
-    		if(in_array($v['id'], $menu_id)){
+    		if(in_array($v['id'], $menu_id) && $v['pid'] > 0 && !in_array($v['pid'], $pid)){
     			$pid[] = $v['pid'];
     		}
     	}

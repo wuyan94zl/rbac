@@ -102,7 +102,7 @@ class RoleController extends Controller
     public function setMenuPermission($id, Request $request){
         $data = $request->validate(['permissions'=>'array']);
         $set_menu_permission = (new RbacRoleHasMenuPermission())->setMenuPermissionForRole($id,$data['permissions']);
-        return $this->responseSucceed();
+        return $this->responseSucceed($set_menu_permission);
     }
 
 }

@@ -24,6 +24,7 @@ class CreateRbacMenusTable extends Migration
             $table->timestamps();
 
             $table->index('pid');
+            $table->index('sort');
         });
     }
 

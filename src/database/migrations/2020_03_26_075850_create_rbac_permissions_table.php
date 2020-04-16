@@ -21,6 +21,7 @@ class CreateRbacPermissionsTable extends Migration
             $table->timestamps();
 
             $table->index('menu_id');
+            $table->index('action');
         });
     }
 

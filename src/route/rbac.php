@@ -2,10 +2,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/eachdemo/rbac',function(){
-	echo "eachdemo-rbac";
-});
-
 Route::group([
 	'namespace'=>'Eachdemo\Rbac\Controllers',
 ],function(){
