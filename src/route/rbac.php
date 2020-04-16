@@ -6,11 +6,6 @@ Route::group([
 	'namespace'=>'Eachdemo\Rbac\Controllers',
 ],function(){
 	Route::post('/eachdemo/rbac/admin/login','AdminController@login');
-	Route::get('/eachdemo/rbac/admin/me','AdminController@me');
-	Route::post('/eachdemo/rbac/admin/lists','AdminController@lists');
-	Route::post('/eachdemo/rbac/admin/create','AdminController@create');
-	Route::post('/eachdemo/rbac/admin/update/{id}','AdminController@update');
-	Route::post('/eachdemo/rbac/admin/delete/{id}','AdminController@delete');
 });
 
 Route::group([
@@ -20,10 +15,19 @@ Route::group([
 
 	// 拉取用户菜单
 	Route::get('/eachdemo/rbac/menus/show','MenuController@menuShow');
+	// 获取登录信息
+	Route::get('/eachdemo/rbac/admin/me','AdminController@me');
 
 	Route::group([
 		'middleware' => 'eachdemo.rbac.permission'
 	],function(){
+
+		// 管理员管理
+		Route::post('/eachdemo/rbac/admin/lists','AdminController@lists');
+		Route::post('/eachdemo/rbac/admin/create','AdminController@create');
+		Route::post('/eachdemo/rbac/admin/update/{id}','AdminController@update');
+		Route::post('/eachdemo/rbac/admin/delete/{id}','AdminController@delete');
+
 		// 菜单相关路由
 		Route::post('/eachdemo/rbac/menu/create','MenuController@create');
 		Route::post('/eachdemo/rbac/menu/edit/{id}','MenuController@update');
