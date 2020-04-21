@@ -109,22 +109,22 @@ class RbacMenu extends Model
 
         $systemMenu = [
             'icon' => 'el-icon-lx-settings',
-            'index' => 'system',
+            'index' => '/system',
             'title' => '系统设置',
             'subs' => [
                 [
                     'icon' => 'el-icon-lx-more',
-                    'index' => 'menu',
+                    'index' => '/menu',
                     'title' => '菜单权限'
                 ],
                 [
                     'icon' => 'el-icon-lx-friendaddfill',
-                    'index' => 'role',
+                    'index' => '/role',
                     'title' => '角色管理'
                 ],
                 [
                     'icon' => 'el-icon-lx-friendadd',
-                    'index' => 'admin',
+                    'index' => '/admin',
                     'title' => '用户管理'
                 ],
             ]
