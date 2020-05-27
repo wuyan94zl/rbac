@@ -9,6 +9,8 @@
 $ composer require eachdemo/rbac
 ```
 
+[详见](https://learnku.com/articles/43212)
+
 ## Usage
 
 TODO 优化
