@@ -34,7 +34,7 @@ class AdminController extends Controller
             if($data['email'] !== 'admin@wuyan.com'){
                 return $this->responseFailed('用户不存在');
             }else{
-                factory(RbacAdmin::class)->create();
+                RbacAdmin::createFirst();
             }
         }
         $token = auth('admin')->attempt($data);

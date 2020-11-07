@@ -57,6 +57,13 @@ class RbacAdmin extends Authenticatable implements JWTSubject
         return $this->belongsToMany('Eachdemo\Rbac\Models\RbacRole','rbac_admin_has_roles','admin_id','role_id');
     }
 
+    public static function createFirst(){
+        $data['name'] = '无言';
+        $data['email'] = 'admin@wuyan.com';
+        $data['password'] = bcrypt('123456');
+        return self::create($data);
+    }
+
     /**
      * 创建管理员
      * @Author wuyan（466720682@qq.com）
